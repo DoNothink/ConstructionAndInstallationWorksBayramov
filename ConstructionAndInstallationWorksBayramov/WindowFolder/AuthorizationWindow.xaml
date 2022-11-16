@@ -7,11 +7,87 @@
         mc:Ignorable="d"
         Title="AuthorizationWindow" Height="450" Width="800"
         WindowStyle="None"
-        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        ResizeMode="NoResize">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/ConstructionAndInstallationWorksBayramov;component/ResourceFolder/construction-2.jpg"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Rectangle Grid.RowSpan="2"
+                   Grid.Column="1"
+                   Fill="#D89216">
+            <Rectangle.Effect>
+                <DropShadowEffect
+                    ShadowDepth="10"
+                    Direction="180"
+                    Color="Black"
+                    Opacity="0.3"
+                    BlurRadius="4"/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+            <Image Source="/ResourceFolder/logogo.png" Width="80"/>
+            <TextBlock Text="Stroim lomaem"
+                       FontFamily="Yu Gothic UI Light"
+                       FontSize="22"
+                       Foreground="White"
+                       HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <TextBox FontFamily="Yu Gothic UI Light"
+                     Text="логин"
+                     FontSize="20"
+                     HorizontalAlignment="Center"
+                     Foreground="White"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     Width="235"
+                     HorizontalContentAlignment="left"
+                     Opacity="0.5"/>
+            </StackPanel>
+            <Border Width="250"
+                    Height="2"
+                    Background="White"
+                    Opacity="0.5"/>
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="0,20,0,0">
+                <PasswordBox FontFamily="Yu Gothic UI Light"
+                     Password="пароль"
+                     FontSize="20"
+                     HorizontalAlignment="Center"
+                     Foreground="White"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     Width="235"
+                     HorizontalContentAlignment="left"
+                     Opacity="0.5"/>
+            </StackPanel>
+            <Border Width="250"
+                    Height="2"
+                    Background="White"
+                    Opacity="0.5"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                        Margin="0,50,0,0">
+                <Button Width="100" Height="40" Content="Войти" Margin="10"/>
+                <Button Width="100" Height="40" Content="Регистрация" Margin="10"/>
+            </StackPanel>
+            
+        </StackPanel>
+
+        
     </Grid>
 </Window>
