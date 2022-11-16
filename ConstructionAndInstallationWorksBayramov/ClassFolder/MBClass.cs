@@ -32,7 +32,7 @@ namespace ConstructionAndInstallationWorksBayramov.ClassFolder
                 MessageBoxImage.Question);
         }
 
-        public static void ExitMessageBox()
+        public static void ExitMB()
         {
             bool resultMB = QuestionMB("Вы действительно " +
                 "желаете выйти?");
