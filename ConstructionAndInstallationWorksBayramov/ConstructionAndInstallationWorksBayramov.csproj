@@ -63,6 +63,9 @@
     <Compile Include="WindowFolder\AuthorizationWindow.xaml.cs">
       <DependentUpon>AuthorizationWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WindowFolder\BrigadierFolder\BrigadierWindow.xaml.cs">
+      <DependentUpon>BrigadierWindow.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassFolder\MBClass.cs" />
@@ -100,12 +103,25 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="WindowFolder\BrigadierFolder\BrigadierWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ResourceFolder\construction-2.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ResourceFolder\logogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ResourceFolder\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ResourceFolder\close2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ResourceFolder\lens.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

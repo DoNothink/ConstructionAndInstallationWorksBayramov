@@ -12,20 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ConstructionAndInstallationWorksBayramov.WindowFolder
+namespace ConstructionAndInstallationWorksBayramov.WindowFolder.BrigadierFolder
 {
     /// <summary>
-    /// Логика взаимодействия для AuthorizationWindow.xaml
+    /// Логика взаимодействия для BrigadierWindow.xaml
     /// </summary>
-    public partial class AuthorizationWindow : Window
+    public partial class BrigadierWindow : Window
     {
-        public AuthorizationWindow()
+        public BrigadierWindow()
         {
             InitializeComponent();
-        }
-        private void LogInBtn_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

@@ -4,6 +4,7 @@
     <Style TargetType="Button">
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontFamily" Value="Yu Gothic UI Light"/>
+        <Setter Property="FontSize" Value="20"/>
 
 
         <Setter Property="Background" Value="Transparent"/>
@@ -12,9 +13,9 @@
                 <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}" CornerRadius="4"
                             BorderThickness="1" BorderBrush="White">
-                        
+
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        
+
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -27,7 +28,99 @@
                 <Setter Property="Foreground" Value="DeepSkyBlue"/>
             </Trigger>
         </Style.Triggers>
-
     </Style>
-    
+
+    <Style TargetType="Button" x:Key="MenuButton">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontFamily" Value="Yu Gothic UI Light"/>
+        <Setter Property="FontSize" Value="20"/>
+
+        <Setter Property="Background" Value="Transparent"/>
+
+        
+        
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="Opacity" Value="0.2"/>
+                <Setter Property="Foreground" Value="DeepSkyBlue"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style BasedOn="{StaticResource {x:Type ToggleButton}}"
+           TargetType="{x:Type RadioButton}"
+           x:Key="MenuButtonTheme">
+        <Style.Setters>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid VerticalAlignment="Stretch"
+                              HorizontalAlignment="Stretch"
+                              Background="{TemplateBinding Background}">
+                            <TextBlock Text="{TemplateBinding Property=Content}"
+                                       VerticalAlignment="Center"
+                                       Margin="40,0,0,0"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style.Setters>
+
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="#282A3A"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style TargetType="{x:Type TextBox}"
+           x:Key="ModernTextBox">
+        <Setter Property="Template">
+            <Setter.Value>
+            <ControlTemplate TargetType="{x:Type TextBox}">
+                <Border CornerRadius="10"
+                        Background="#353340">
+                    <Grid>
+                        <Rectangle StrokeThickness="1"/>
+                            <TextBox Margin="1"
+                                 Text="{TemplateBinding Text}"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalContentAlignment="Center"
+                                 Padding="5"
+                                 Foreground="#cfcfcf"
+                                 x:Name="SearchBox"/>
+
+                            <TextBlock IsHitTestVisible="False"
+                                       Text="Поиск"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10,0,0,0"
+                                       FontSize="11"
+                                       Foreground="DarkGray"
+                                       Grid.Column="1">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=SearchBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </Style>
+                                </TextBlock.Style>
+                                
+                            </TextBlock>
+                        </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

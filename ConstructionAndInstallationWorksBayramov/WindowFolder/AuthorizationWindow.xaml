@@ -5,10 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConstructionAndInstallationWorksBayramov.WindowFolder"
         mc:Ignorable="d"
-        Title="AuthorizationWindow" Height="450" Width="800"
-        WindowStyle="None"
-        MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        ResizeMode="NoResize">
+        Title="Авторизация"
+        Height="450" Width="800"
+        MaxHeight="450" MaxWidth="800"
+        MinHeight="450" MinWidth="800"
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/ConstructionAndInstallationWorksBayramov;component/ResourceFolder/construction-2.jpg"/>
@@ -21,6 +24,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+
         <Rectangle Grid.RowSpan="2"
                    Grid.Column="1"
                    Fill="#D89216">
@@ -33,9 +37,10 @@
                     BlurRadius="4"/>
             </Rectangle.Effect>
         </Rectangle>
+
         <StackPanel Grid.Column="1" VerticalAlignment="Center">
             <Image Source="/ResourceFolder/logogo.png" Width="80"/>
-            <TextBlock Text="Stroim lomaem"
+            <Label Content="Stroim lomaem"
                        FontFamily="Yu Gothic UI Light"
                        FontSize="22"
                        Foreground="White"
@@ -81,13 +86,14 @@
                     Opacity="0.5"/>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
-                        Margin="0,50,0,0">
-                <Button Width="100" Height="40" Content="Войти" Margin="10"/>
-                <Button Width="100" Height="40" Content="Регистрация" Margin="10"/>
+                        Margin="0,15,0,0">
+                <Button x:Name="LogInBtn"
+                        Width="100" Height="40"
+                        Content="Войти" Margin="10"
+                        Click="LogInBtn_Click"/>
             </StackPanel>
-            
         </StackPanel>
-
+        
         
     </Grid>
 </Window>
