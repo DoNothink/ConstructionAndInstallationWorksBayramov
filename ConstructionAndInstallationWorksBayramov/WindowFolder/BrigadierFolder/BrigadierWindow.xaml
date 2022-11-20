@@ -9,7 +9,8 @@
         Height="600" Width="1000"
         MaxHeight="600" MaxWidth="1000"
         MinHeight="600" MinWidth="1000"
-        Background="#282A3A">
+        Background="#282A3A"
+        Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -43,30 +44,139 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1">
-            <RadioButton Content="Home"
+            <RadioButton Content="Список сотрудников"
                          Height="50"
                          Foreground="White"
                          FontSize="14"
-                         Style="{StaticResource MenuButtonTheme}"/>
-            <RadioButton Content="Discovery"
+                         Style="{StaticResource MenuButtonTheme}"
+                         Checked="RadioButton_Checked"/>
+            <RadioButton Content="Добавить сотрудника"
                          Height="50"
                          Foreground="White"
                          FontSize="14"
-                         Style="{StaticResource MenuButtonTheme}"/>
-            <RadioButton Content="Features"
-                         Height="50"
-                         Foreground="White"
-                         FontSize="14"
-                         Style="{StaticResource MenuButtonTheme}"/>
+                         Style="{StaticResource MenuButtonTheme}"
+                         Checked="RadioButton_Checked"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" VerticalAlignment="Bottom">
+            <Button Content="Выход"
+                    Style="{DynamicResource Buttontest}">
+                <Button.Effect>
+                    <DropShadowEffect
+                        ShadowDepth="5"
+                    Direction="90"
+                    Color="Black"
+                    Opacity="0.2"
+                    BlurRadius="50"/>
+                </Button.Effect>
+            </Button>
+            <Button Content="Закрыть приложение" Background="IndianRed"
+                    VerticalAlignment="Bottom"
+                    Style="{DynamicResource Buttontest}"
+                    BorderBrush="Transparent"/>
         </StackPanel>
 
-        <TextBox Width="250"
+        <TextBox x:Name="SearchTB"
+                Width="250"
                  Height="40"
                  VerticalContentAlignment="Center"
                  HorizontalAlignment="Left"
                  Margin="35,0,0,0"
                  Grid.Column="1"
-                 Style="{StaticResource ModernTextBox}"/>
+                 Style="{StaticResource ModernTextBox}"
+                 Visibility="Hidden"/>
 
+        <Grid x:Name="GridListWorkers"
+              Grid.Row="1" Grid.Column="1"
+              Visibility="Hidden">
+            <DataGrid x:Name="ListWorkersDG"
+                  AutoGenerateColumns="False"
+                  ScrollViewer.CanContentScroll="True"
+                     ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="№ п/п"
+                                    Binding="{Binding IdWorkers}"
+                                    Width="50"/>
+                    <DataGridTextColumn Header="Фамилия"
+                                    Binding="{Binding LastNameWorker}"
+                                    Width="100"/>
+                    <DataGridTextColumn Header="Имя"
+                                    Binding="{Binding FirstNameWorker}"
+                                    Width="100"/>
+                    <DataGridTextColumn Header="Отчество"
+                                    Binding="{Binding MiddleNameWorker}"
+                                    Width="100"/>
+                    <DataGridTextColumn Header="Дата рождения"
+                                    Binding="{Binding DateOfBirthWorker}"
+                                    Width="150"/>
+                </DataGrid.Columns>
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="0" Background="Transparent" Padding="10">
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="14" Text="Гражданство: " 
+                                               FontWeight="Bold"
+                                               FontFamily="Yu Gothic UI Bold"
+                                               VerticalAlignment="Center" />
+                                    <TextBlock FontSize="16" Foreground="White" 
+                                               Text="{Binding CitizenshipName}" 
+                                               VerticalAlignment="Center" />
+                                </StackPanel>
+                                                 
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="14" Text="Специальность: "
+                                                FontWeight="Bold"
+                                               FontFamily="Yu Gothic UI Bold"
+                                               VerticalAlignment="Center" />
+                                    <TextBlock FontSize="16" Foreground="White" 
+                                               Text="{Binding NameSpecialty}" 
+                                               VerticalAlignment="Center" />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="14" Text="Должность: "
+                                                FontWeight="Bold"
+                                               FontFamily="Yu Gothic UI Bold"
+                                               VerticalAlignment="Center" />
+                                    <TextBlock FontSize="16" Foreground="White" 
+                                               Text="{Binding NamePost}" 
+                                               VerticalAlignment="Center" />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="14" Text="Бригада: "
+                                                FontWeight="Bold"
+                                               FontFamily="Yu Gothic UI Bold"
+                                               VerticalAlignment="Center" />
+                                    <TextBlock FontSize="16" Foreground="White" 
+                                               Text="{Binding NameBrigade}" 
+                                               VerticalAlignment="Center" />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="14" Text="Номер телефона: "
+                                                FontWeight="Bold"
+                                               FontFamily="Yu Gothic UI Bold"
+                                               VerticalAlignment="Center" />
+                                    <TextBlock FontSize="16" Foreground="White" 
+                                               Text="{Binding PhoneNumberWorker}" 
+                                               VerticalAlignment="Center" />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="14" Text="Эл. почта: "
+                                                FontWeight="Bold"
+                                               FontFamily="Yu Gothic UI Bold"
+                                               VerticalAlignment="Center" />
+                                    <TextBlock FontSize="16" Foreground="White" 
+                                               Text="{Binding EmailWorker}" 
+                                               VerticalAlignment="Center" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+            </DataGrid>
+        </Grid>
     </Grid>
 </Window>

@@ -30,6 +30,26 @@
         </Style.Triggers>
     </Style>
 
+    <Style TargetType="Button" x:Key="Buttontest">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontFamily" Value="Yu Gothic UI Light"/>
+        <Setter Property="FontSize" Value="20"/>
+
+        <Setter Property="BorderBrush" Value="Transparent"/>
+
+
+        <Setter Property="Background" Value="#D89216"/>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Opacity" Value="0.4"/>
+                <Setter Property="Foreground" Value="Transparent"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
     <Style TargetType="Button" x:Key="MenuButton">
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontFamily" Value="Yu Gothic UI Light"/>
@@ -47,7 +67,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
 
     <Style BasedOn="{StaticResource {x:Type ToggleButton}}"
            TargetType="{x:Type RadioButton}"
@@ -78,16 +97,15 @@
         </Style.Triggers>
     </Style>
 
-
     <Style TargetType="{x:Type TextBox}"
            x:Key="ModernTextBox">
         <Setter Property="Template">
             <Setter.Value>
-            <ControlTemplate TargetType="{x:Type TextBox}">
-                <Border CornerRadius="10"
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border CornerRadius="10"
                         Background="#353340">
-                    <Grid>
-                        <Rectangle StrokeThickness="1"/>
+                        <Grid>
+                            <Rectangle StrokeThickness="1"/>
                             <TextBox Margin="1"
                                  Text="{TemplateBinding Text}"
                                  BorderThickness="0"
@@ -115,12 +133,40 @@
                                         <Setter Property="Visibility" Value="Hidden"/>
                                     </Style>
                                 </TextBlock.Style>
-                                
+
                             </TextBlock>
                         </Grid>
-                </Border>
-            </ControlTemplate>
-        </Setter.Value>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
         </Setter>
+    </Style>
+
+    
+
+
+
+
+    <Style TargetType="DataGrid">
+        <Setter Property="VerticalGridLinesBrush" Value="Gray"/> <!--yacheiki-->
+        <Setter Property="HorizontalGridLinesBrush" Value="Gray"/>
+
+        <Setter Property="AlternatingRowBackground" Value="#379237"/>
+        <Setter Property="RowBackground" Value="#54B435"/>
+        <Setter Property="RowHeight" Value="25"/>
+        <Setter Property="RowHeaderWidth" Value="0"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="#ff2c3e50"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="FontSize" Value="12"/>
+    </Style>
+    <Style TargetType="DataGridColumnHeader">
+        <Setter Property="Background" Value="Green"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="White"/>
     </Style>
 </ResourceDictionary>

@@ -13,11 +13,13 @@ namespace ConstructionAndInstallationWorksBayramov
     /// </summary>
     public partial class App : Application
     {
-        public static string ConnectionBD()
-        {
-            string connectionString = ConfigurationManager.
-                ConnectionStrings["ConnectionBD"].ConnectionString;
-            return connectionString;
-        }
+        //public static string ConnectionBD()
+        //{
+        //    string connectionString = ConfigurationManager.
+        //        ConnectionStrings["Data Source=DESKTOP-D69MI98;" +
+        //        "Initial Catalog=ConstructionAndInstallationWorksBayramov;" +
+        //        "Integrated Security=True"].ConnectionString;
+        //    return connectionString;
+        //}
     }
 }
