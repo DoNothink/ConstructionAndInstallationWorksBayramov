@@ -23,5 +23,29 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder.AdminFolder
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// Метод обработки RadioButton,
+        /// которые отвечают за видимость
+        /// определенных элементов на экране.
+        /// Грубо говоря, наши вкладки :)
+        /// </summary>
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            switch ((sender as RadioButton).Content)
+            {
+                case "Список пользователей":
+                    GridListUsers.Visibility = Visibility.Visible; //вкл. грид+список
+                    SearchTB.Visibility = Visibility.Visible; //вкл. поискТБ
+                    GridAddUser.Visibility = Visibility.Hidden; //выкл. грид с добавлением
+                    break;
+
+                case "Добавить пользователя":
+                    GridAddUser.Visibility = Visibility.Visible; //вкл. грид с добавлением
+                    GridListUsers.Visibility = Visibility.Hidden; //выкл. грид+список
+                    SearchTB.Visibility = Visibility.Hidden; //выкл поискТБ
+                    break;
+            }
+        }
     }
 }

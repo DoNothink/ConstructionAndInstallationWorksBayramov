@@ -19,6 +19,8 @@
             <RowDefinition Height="100"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        
+        <!--Панель справа-->
         <Rectangle Grid.RowSpan="2"
                    Grid.Column="0"
                    Fill="#D89216">
@@ -31,7 +33,9 @@
                     BlurRadius="100"/>
             </Rectangle.Effect>
         </Rectangle>
-
+        
+        <!--StackPanel с логотипом
+            и названием компании-->
         <StackPanel>
             <Image Source="/ResourceFolder/logogo.png" Width="50"
                    Margin="0,10,0,0"/>
@@ -42,23 +46,35 @@
                        HorizontalAlignment="Center"/>
         </StackPanel>
 
+        <!--StackPanel с RadioButton
+            которые выполняют задачу
+            вкладок(переключают меню)-->
         <StackPanel Grid.Row="1">
+            <!--RadioButton(список юзеров)-->
             <RadioButton Content="Список пользователей"
                          Height="50"
                          Foreground="White"
                          FontSize="14"
                          Style="{StaticResource MenuButtonTheme}"
-                         />
+                         Checked="RadioButton_Checked"/>
+            
+            <!--RadioButton(добавить юзера)-->
             <RadioButton Content="Добавить пользователя"
                          Height="50"
                          Foreground="White"
                          FontSize="14"
                          Style="{StaticResource MenuButtonTheme}"
-                         />
+                         Checked="RadioButton_Checked"/>
         </StackPanel>
+        
+        <!--StackPanel с кнопками
+            Выхода из аккаунта и закрытия
+            приложения-->
         <StackPanel Grid.Row="1" VerticalAlignment="Bottom">
+            <!--Button(Выход из аккаунта)-->
             <Button Content="Выход"
                     Style="{DynamicResource Buttontest}">
+                <!--Тень от кнопки-->
                 <Button.Effect>
                     <DropShadowEffect
                         ShadowDepth="5"
@@ -68,12 +84,16 @@
                     BlurRadius="50"/>
                 </Button.Effect>
             </Button>
+            
+            <!--Button(Закрыть приложение)-->
             <Button Content="Закрыть приложение" Background="IndianRed"
                     VerticalAlignment="Bottom"
                     Style="{DynamicResource Buttontest}"
                     BorderBrush="Transparent"/>
         </StackPanel>
 
+        <!--Поле поиска в списке.
+            Относится к гриду со списком.-->
         <TextBox x:Name="SearchTB"
                 Width="250"
                  Height="40"
@@ -83,14 +103,16 @@
                  Grid.Column="1"
                  Style="{StaticResource ModernTextBox}"
                  Visibility="Hidden"/>
-
-        <Grid x:Name="GridListWorkers"
+        <!--Грид со списком пользователей-->
+        <Grid x:Name="GridListUsers"
               Grid.Row="1" Grid.Column="1"
-              Visibility="Visible">
+              Visibility="Hidden">
+            <!--ДатаГрид со списком пользователей.-->
             <DataGrid x:Name="ListWorkersDG"
                   AutoGenerateColumns="False"
                   ScrollViewer.CanContentScroll="True"
                      ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                <!--Колонки в таблице-->
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="№ п/п"
                                     Binding="{Binding IdUser}"
@@ -106,6 +128,14 @@
                                     Width="100"/>
                 </DataGrid.Columns>   
             </DataGrid>
+        </Grid>
+
+        <!--Грид отвечающий 
+            за меню добавления пользователя-->
+        <Grid Name="GridAddUser"
+              Grid.Row="1" Grid.Column="1"
+              Visibility="Visible">
+            
         </Grid>
     </Grid>
 </Window>
