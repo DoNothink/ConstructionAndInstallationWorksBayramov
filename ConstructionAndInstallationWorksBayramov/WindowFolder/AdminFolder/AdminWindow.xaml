@@ -9,7 +9,8 @@
         Height="600" Width="1000"
         MaxHeight="600" MaxWidth="1000"
         MinHeight="600" MinWidth="1000"
-        Background="#282A3A">
+        Background="#282A3A"
+        Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -72,8 +73,10 @@
             приложения-->
         <StackPanel Grid.Row="1" VerticalAlignment="Bottom">
             <!--Button(Выход из аккаунта)-->
-            <Button Content="Выход"
-                    Style="{DynamicResource Buttontest}">
+            <Button x:Name="LogOutBtn"
+                    Content="Выход"
+                    Style="{DynamicResource Buttontest}"
+                    Click="LogOutBtn_Click">
                 <!--Тень от кнопки-->
                 <Button.Effect>
                     <DropShadowEffect
@@ -86,10 +89,13 @@
             </Button>
             
             <!--Button(Закрыть приложение)-->
-            <Button Content="Закрыть приложение" Background="IndianRed"
+            <Button x:Name="CloseAppBtn"
+                    Content="Закрыть приложение" 
+                    Background="IndianRed"
                     VerticalAlignment="Bottom"
                     Style="{DynamicResource Buttontest}"
-                    BorderBrush="Transparent"/>
+                    BorderBrush="Transparent"
+                    Click="CloseAppBtn_Click"/>
         </StackPanel>
 
         <!--Поле поиска в списке.
@@ -108,9 +114,10 @@
               Grid.Row="1" Grid.Column="1"
               Visibility="Hidden">
             <!--ДатаГрид со списком пользователей.-->
-            <DataGrid x:Name="ListWorkersDG"
+            <DataGrid x:Name="ListUserDG"
                   AutoGenerateColumns="False"
                   ScrollViewer.CanContentScroll="True"
+                      IsReadOnly="True"
                      ScrollViewer.HorizontalScrollBarVisibility="Visible">
                 <!--Колонки в таблице-->
                 <DataGrid.Columns>
@@ -118,13 +125,13 @@
                                     Binding="{Binding IdUser}"
                                     Width="50"/>
                     <DataGridTextColumn Header="Логин"
-                                    Binding="{Binding Login}"
+                                    Binding="{Binding LoginUser}"
                                     Width="100"/>
                     <DataGridTextColumn Header="Пароль"
-                                    Binding="{Binding Password}"
+                                    Binding="{Binding PasswordUser}"
                                     Width="100"/>
                     <DataGridTextColumn Header="Роль"
-                                    Binding="{Binding IdRole}"
+                                    Binding="{Binding RoleName}"
                                     Width="100"/>
                 </DataGrid.Columns>   
             </DataGrid>
@@ -141,32 +148,48 @@
             </Grid.ColumnDefinitions>
             
             <!--Плашка для ТБ/ПБ-->
-            <Rectangle Grid.Column="0" Fill="AliceBlue"
-                       VerticalAlignment="Top"
-                       RadiusX="10" RadiusY="10"
-                       Margin="10"
-                       Height="180"/>
+            <Rectangle Grid.ColumnSpan="2" 
+                       Fill="#46495d"
+                       Margin="10">
+                <Rectangle.Effect>
+                    <DropShadowEffect
+                    ShadowDepth="10" 
+                    Direction="70"
+                    Color="Black"
+                    Opacity="0.6"
+                    BlurRadius="100"/>
+                </Rectangle.Effect>
+            </Rectangle>
             
             <!--StackPanel с полями ввода
                 Логина и Пароля-->
             <StackPanel HorizontalAlignment="Center">
                 <!--TextBox для Логина-->
-                <TextBox x:Name="AddLoginTB"
-                    Width="200" Height="40"
-                    Margin="0,20,0,0"
+                <TextBox x:Name="LoginTB"
+                         Visibility="Visible"
+                    Width="200" Height="30"
+                    Margin="0,40,0,0"
                     Style="{DynamicResource ModernTextBox}">
                 </TextBox>
                 <!--PasswordBox для Пароля-->
-                <PasswordBox x:Name="AddPasswordPB"
-                    Width="200" Height="40"
+                <PasswordBox x:Name="PasswordPB"
+                             Visibility="Visible"
+                    Width="200" Height="30"
+                    Margin="0,10,0,0"
+                    Style="{DynamicResource ModernPasswordBox}"/>
+                <PasswordBox x:Name="RepeatPasswordPB"
+                    Width="200" Height="30"
                     Margin="0,10,0,0"
                     Style="{DynamicResource ModernPasswordBox}"/>
                 <ComboBox x:Name="RoleCB"
-                          Width="200" Height="40"
-                          Margin="0,10,0,0"/>
+                          Width="200" Height="30"
+                          Margin="0,30,0,0"/>
+                <Button x:Name="AddUserBtn"
+                    Margin="0,20,0,0"
+                    Content="Добавить пользователя"
+                    Width="300" Height="50"
+                    Click="AddUserBtn_Click"/>
             </StackPanel>
-            <Button Content="Добавить пользователя"
-                    Width="300" Height="50"/>
         </Grid>
     </Grid>
 </Window>

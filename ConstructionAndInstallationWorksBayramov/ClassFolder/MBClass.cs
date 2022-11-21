@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -35,7 +37,7 @@ namespace ConstructionAndInstallationWorksBayramov.ClassFolder
         public static void ExitMB()
         {
             bool resultMB = QuestionMB("Вы действительно " +
-                "желаете выйти?");
+                "желаете закрыть приложение?");
             if (resultMB == true)
             {
                 App.Current.Shutdown();

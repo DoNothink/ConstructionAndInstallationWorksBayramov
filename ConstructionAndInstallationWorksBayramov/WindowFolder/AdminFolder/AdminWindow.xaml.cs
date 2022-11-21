@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ConstructionAndInstallationWorksBayramov.ClassFolder;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +21,19 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder.AdminFolder
     /// </summary>
     public partial class AdminWindow : Window
     {
+        CBClass cBClass = new CBClass();
+        DGClass dGClass;
+        SqlConnection sqlConnection =
+            new SqlConnection("Data Source=DESKTOP-D69MI98;" +
+            "Initial Catalog=ConstructionAndInstallationWorksBayramov;" +
+            "Integrated Security=True");
+        SqlCommand sqlCommand;
+
         public AdminWindow()
         {
             InitializeComponent();
+            cBClass.RoleCBLoad(RoleCB);
+            dGClass = new DGClass(ListUserDG);
         }
 
         /// <summary>
@@ -45,6 +57,66 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder.AdminFolder
                     GridListUsers.Visibility = Visibility.Hidden; //выкл. грид+список
                     SearchTB.Visibility = Visibility.Hidden; //выкл поискТБ
                     break;
+            }
+        }
+
+        /// <summary>
+        /// Выгрузка представления
+        /// из базы данных
+        /// </summary>
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            dGClass.LoadDG("SELECT * FROM dbo.[UserView]");
+        }
+
+        /// <summary>
+        /// Метод, отвечающий за выход
+        /// из аккаунта
+        /// </summary>
+        private void LogOutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            bool resultMB = MBClass.QuestionMB("Вы действительно " +
+                "желаете выйти из аккаунта?");
+            if(resultMB)
+            {      
+                new AuthorizationWindow().Show();
+                this.Close();
+            }
+        }
+
+        /// <summary>
+        /// Метод, отвечающий за закрытие
+        /// приложения
+        /// </summary>
+        private void CloseAppBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MBClass.ExitMB();
+        }
+
+        private void AddUserBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string login = LoginTB.Text;
+                string password = PasswordPB.Password;
+                sqlConnection.Open();
+                sqlCommand = new SqlCommand("Insert into dbo.[User] " +
+                    "(LoginUser, PasswordUser, IdRole) " +
+                    $"Values ('{login}', " +
+                    $"'{password}', " +                    
+                    $"'{RoleCB.SelectedValue.ToString()}')", sqlConnection);
+                sqlCommand.ExecuteNonQuery();
+                MBClass.InfoMB($"Пользователь {login} " +
+                    $"успешно добавлен");
+            }
+            catch (Exception ex)
+            {
+                MBClass.ErrorMB(ex);
+            }
+            finally
+            {
+                sqlConnection.Close();
+                dGClass.LoadDG("SELECT * FROM dbo.[UserView]");
             }
         }
     }
