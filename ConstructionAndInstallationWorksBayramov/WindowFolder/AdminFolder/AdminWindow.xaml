@@ -107,7 +107,7 @@
                  HorizontalAlignment="Left"
                  Margin="35,0,0,0"
                  Grid.Column="1"
-                 Style="{StaticResource ModernTextBox}"
+                 
                  Visibility="Hidden"/>
         <!--Грид со списком пользователей-->
         <Grid x:Name="GridListUsers"
@@ -125,10 +125,10 @@
                                     Binding="{Binding IdUser}"
                                     Width="50"/>
                     <DataGridTextColumn Header="Логин"
-                                    Binding="{Binding LoginUser}"
+                                    Binding="{Binding Login}"
                                     Width="100"/>
                     <DataGridTextColumn Header="Пароль"
-                                    Binding="{Binding PasswordUser}"
+                                    Binding="{Binding Password}"
                                     Width="100"/>
                     <DataGridTextColumn Header="Роль"
                                     Binding="{Binding RoleName}"
@@ -143,12 +143,13 @@
               Grid.Row="1" Grid.Column="1"
               Visibility="Visible">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
             
             <!--Плашка для ТБ/ПБ-->
-            <Rectangle Grid.ColumnSpan="2" 
+            <Rectangle Grid.ColumnSpan="3" 
                        Fill="#46495d"
                        Margin="10">
                 <Rectangle.Effect>
@@ -160,34 +161,32 @@
                     BlurRadius="100"/>
                 </Rectangle.Effect>
             </Rectangle>
-            
-            <!--StackPanel с полями ввода
+            <!--с полями ввода
                 Логина и Пароля-->
-            <StackPanel HorizontalAlignment="Center">
-                <!--TextBox для Логина-->
+            <StackPanel HorizontalAlignment="Center"
+                        Grid.Column="1">
+                <!--для Логина-->
                 <TextBox x:Name="LoginTB"
-                         Visibility="Visible"
                     Width="200" Height="30"
                     Margin="0,40,0,0"
-                    Style="{DynamicResource ModernTextBox}">
+                    >
                 </TextBox>
-                <!--PasswordBox для Пароля-->
+                <!--для Пароля-->
                 <PasswordBox x:Name="PasswordPB"
-                             Visibility="Visible"
                     Width="200" Height="30"
                     Margin="0,10,0,0"
-                    Style="{DynamicResource ModernPasswordBox}"/>
+                    />
                 <PasswordBox x:Name="RepeatPasswordPB"
                     Width="200" Height="30"
                     Margin="0,10,0,0"
-                    Style="{DynamicResource ModernPasswordBox}"/>
+                    />
                 <ComboBox x:Name="RoleCB"
                           Width="200" Height="30"
                           Margin="0,30,0,0"/>
                 <Button x:Name="AddUserBtn"
                     Margin="0,20,0,0"
                     Content="Добавить пользователя"
-                    Width="300" Height="50"
+                    Width="200" Height="50"
                     Click="AddUserBtn_Click"/>
             </StackPanel>
         </Grid>

@@ -33,7 +33,7 @@
         <Setter Property="FontFamily" Value="Yu Gothic UI Bold"/>
     </Style>
 
-    <!--Стиль для TextBox-->
+    <!--Стиль для TextBox
     <Style TargetType="{x:Type TextBox}"
            x:Key="ModernTextBox">
         <Setter Property="Template">
@@ -44,7 +44,6 @@
                         <Grid>
                             <Rectangle StrokeThickness="1"/>
                             <TextBox Margin="1"
-                                 Text="{TemplateBinding Text}"
                                  BorderThickness="0"
                                  Background="Transparent"
                                  VerticalContentAlignment="Center"
@@ -57,7 +56,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <!--Стиль для PasswordBox-->
+    -->
+    <!--Стиль для PasswordBox
     <Style TargetType="{x:Type PasswordBox}"
            x:Key="ModernPasswordBox">
         <Setter Property="Template">
@@ -80,6 +80,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+    -->
 
     <!--RadioButton в виде плашек-->
     <Style BasedOn="{StaticResource {x:Type ToggleButton}}"

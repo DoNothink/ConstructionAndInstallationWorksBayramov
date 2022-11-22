@@ -12,9 +12,9 @@ namespace ConstructionAndInstallationWorksBayramov.ClassFolder
     class CBClass
     {
         SqlConnection sqlConnection =
-            new SqlConnection("Data Source=DESKTOP-D69MI98;" +
-            "Initial Catalog=ConstructionAndInstallationWorksBayramov;" +
-            "Integrated Security=True");
+            new SqlConnection(@"Data Source=K218PC\SQLEXPRESS;" +
+                "Initial Catalog=ConstructionAndInstallationWorksBayramov;" +
+                "Integrated Security=True");
         SqlDataAdapter dataAdapter;
         DataSet dataSet;
 

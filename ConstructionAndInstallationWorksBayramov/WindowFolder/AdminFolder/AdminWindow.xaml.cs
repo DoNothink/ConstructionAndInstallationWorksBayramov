@@ -24,9 +24,9 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder.AdminFolder
         CBClass cBClass = new CBClass();
         DGClass dGClass;
         SqlConnection sqlConnection =
-            new SqlConnection("Data Source=DESKTOP-D69MI98;" +
-            "Initial Catalog=ConstructionAndInstallationWorksBayramov;" +
-            "Integrated Security=True");
+            new SqlConnection(@"Data Source=K218PC\SQLEXPRESS;" +
+                "Initial Catalog=ConstructionAndInstallationWorksBayramov;" +
+                "Integrated Security=True");
         SqlCommand sqlCommand;
 
         public AdminWindow()
@@ -93,20 +93,22 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder.AdminFolder
             MBClass.ExitMB();
         }
 
+        /// <summary>
+        ///  Обработчик кнопки, 
+        ///  отвечающий за добавление нового пользователя
+        /// </summary>
         private void AddUserBtn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                string login = LoginTB.Text;
-                string password = PasswordPB.Password;
                 sqlConnection.Open();
                 sqlCommand = new SqlCommand("Insert into dbo.[User] " +
-                    "(LoginUser, PasswordUser, IdRole) " +
-                    $"Values ('{login}', " +
-                    $"'{password}', " +                    
+                    "([Login], [Password], IdRole) " +
+                    $"Values ('{LoginTB.Text}', " +
+                    $"'{PasswordPB.Password}', " +
                     $"'{RoleCB.SelectedValue.ToString()}')", sqlConnection);
                 sqlCommand.ExecuteNonQuery();
-                MBClass.InfoMB($"Пользователь {login} " +
+                MBClass.InfoMB($"Пользователь {LoginTB.Text} " +
                     $"успешно добавлен");
             }
             catch (Exception ex)
