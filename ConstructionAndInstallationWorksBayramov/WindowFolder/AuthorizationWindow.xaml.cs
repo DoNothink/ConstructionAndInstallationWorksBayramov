@@ -22,9 +22,9 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder
     public partial class AuthorizationWindow : Window
     {
         SqlConnection sqlConnection =
-            new SqlConnection(@"Data Source=K218PC\SQLEXPRESS;" +
-                "Initial Catalog=ConstructionAndInstallationWorksBayramov;" +
-                "Integrated Security=True");
+            new SqlConnection(@"Data Source=DESKTOP-D69MI98;
+                    Initial Catalog=ConstructionAndInstallationWorksBayramov;
+                    Integrated Security=True");
         SqlCommand sqlCommand;
         SqlDataReader sqlDataReader;
         public AuthorizationWindow()
@@ -48,25 +48,27 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder
                     sqlConnection.Open();
                     sqlCommand = new SqlCommand("SELECT * FROM " +
                         "dbo.[User] " +
-                        $"Where [Login] = '{LoginTB.Text}'", sqlConnection);
+                        $"Where [LoginUser] = '{LoginTB.Text}'", sqlConnection);
                     sqlDataReader = sqlCommand.ExecuteReader();
                     sqlDataReader.Read();
                     if (sqlDataReader[2].ToString() != PasswordPB.Password)
                     {
-                        MBClass.ErrorMB("Вы ввели не верный пароль");
+                        MBClass.ErrorMB("Вы ввели неверный логин или пароль");
                         PasswordPB.Focus();
                     }
                     else
                     {
-                        switch (sqlDataReader[3].ToString())
-                        {
-                            case "1":
-                                new AdminFolder.AdminWindow().Show();
-                                break;
-                            case "2":
-                                new BrigadierFolder.BrigadierWindow().Show();
-                                break;
-                        }
+                            switch (sqlDataReader[3].ToString())
+                            {
+                                case "1":
+                                    new AdminFolder.AdminWindow().Show();
+                                    this.Close();
+                                    break;
+                                case "2":
+                                    new BrigadierFolder.BrigadierWindow().Show();
+                                    this.Close();
+                                    break;
+                            }                        
                     }
                 }
                 catch (Exception ex)

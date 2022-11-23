@@ -4,10 +4,10 @@
              xmlns:local="clr-namespace:ConstructionAndInstallationWorksBayramov"
              StartupUri="WindowFolder/AuthorizationWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary>
+        <!--<ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ResourceFolder/Dictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        </ResourceDictionary>-->
     </Application.Resources>
 </Application>

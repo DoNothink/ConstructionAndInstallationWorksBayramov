@@ -12,29 +12,24 @@ namespace ConstructionAndInstallationWorksBayramov.ClassFolder
     class CBClass
     {
         SqlConnection sqlConnection =
-            new SqlConnection(@"Data Source=K218PC\SQLEXPRESS;" +
-                "Initial Catalog=ConstructionAndInstallationWorksBayramov;" +
-                "Integrated Security=True");
+            new SqlConnection(@"Data Source=DESKTOP-D69MI98;
+                    Initial Catalog=ConstructionAndInstallationWorksBayramov;
+                    Integrated Security=True");
         SqlDataAdapter dataAdapter;
         DataSet dataSet;
 
-        /// <summary>
-        /// Метод загрузки роли в 
-        /// ComboBox в окне Администратора
-        /// </summary>
-        /// <param name="comboBox"> комбобокс</param>
-        public void RoleCBLoad(ComboBox comboBox)
+        public void CBLoad(ComboBox comboBox, string TableName, string IdColumn, string NameColumn)
         {
             try
             {
                 sqlConnection.Open();
-                dataAdapter = new SqlDataAdapter("Select IdRole, RoleName " +
-                    "From dbo.[Role] Order by IdRole ASC", sqlConnection);
+                dataAdapter = new SqlDataAdapter($"Select {IdColumn}, {NameColumn} " +
+                    $"From dbo.[{TableName}] Order by {IdColumn} ASC", sqlConnection);
                 dataSet = new DataSet();
-                dataAdapter.Fill(dataSet, "[Role]");
-                comboBox.ItemsSource = dataSet.Tables["[Role]"].DefaultView;
-                comboBox.DisplayMemberPath = dataSet.Tables["[Role]"].Columns["RoleName"].ToString();
-                comboBox.SelectedValuePath = dataSet.Tables["[Role]"].Columns["IdRole"].ToString();
+                dataAdapter.Fill(dataSet, $"{TableName}");
+                comboBox.ItemsSource = dataSet.Tables[$"{TableName}"].DefaultView;
+                comboBox.DisplayMemberPath = dataSet.Tables[$"{TableName}"].Columns[$"{NameColumn}"].ToString();
+                comboBox.SelectedValuePath = dataSet.Tables[$"{TableName}"].Columns[$"{IdColumn}"].ToString();
             }
             catch (Exception ex)
             {

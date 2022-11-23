@@ -5,10 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConstructionAndInstallationWorksBayramov.WindowFolder.BrigadierFolder"
         mc:Ignorable="d"
-        Title="Меню бригадира"
-        Height="600" Width="1000"
-        MaxHeight="600" MaxWidth="1000"
-        MinHeight="600" MinWidth="1000"
+        Title="BrigadierWindow" 
+        Height="700" Width="1000"
         Background="#282A3A"
         Loaded="Window_Loaded">
     <Grid>
@@ -20,6 +18,8 @@
             <RowDefinition Height="100"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+
+        <!--Панель справа-->
         <Rectangle Grid.RowSpan="2"
                    Grid.Column="0"
                    Fill="#D89216">
@@ -33,33 +33,15 @@
             </Rectangle.Effect>
         </Rectangle>
 
-        <StackPanel>
-            <Image Source="/ResourceFolder/logogo.png" Width="50"
-                   Margin="0,10,0,0"/>
-            <Label Content="Stroim lomaem"
-                       FontFamily="Yu Gothic UI Light"
-                       FontSize="22"
-                       Foreground="White"
-                       HorizontalAlignment="Center"/>
-        </StackPanel>
-
-        <StackPanel Grid.Row="1">
-            <RadioButton Content="Список сотрудников"
-                         Height="50"
-                         Foreground="White"
-                         FontSize="14"
-                         Style="{StaticResource MenuButtonTheme}"
-                         Checked="RadioButton_Checked"/>
-            <RadioButton Content="Добавить сотрудника"
-                         Height="50"
-                         Foreground="White"
-                         FontSize="14"
-                         Style="{StaticResource MenuButtonTheme}"
-                         Checked="RadioButton_Checked"/>
-        </StackPanel>
+        <!--StackPanel с кнопками
+            Выхода из аккаунта и закрытия
+            приложения-->
         <StackPanel Grid.Row="1" VerticalAlignment="Bottom">
-            <Button Content="Выход"
-                    Style="{DynamicResource Buttontest}">
+            <!--Button(Выход из аккаунта)-->
+            <Button x:Name="LogOutBtn"
+                    Content="Выход"                   
+                    Click="LogOutBtn_Click">
+                <!--Тень от кнопки-->
                 <Button.Effect>
                     <DropShadowEffect
                         ShadowDepth="5"
@@ -69,29 +51,82 @@
                     BlurRadius="50"/>
                 </Button.Effect>
             </Button>
-            <Button Content="Закрыть приложение" Background="IndianRed"
-                    VerticalAlignment="Bottom"
-                    Style="{DynamicResource Buttontest}"
-                    BorderBrush="Transparent"/>
+
+            <!--Button(Закрыть приложение)-->
+            <Button x:Name="CloseAppBtn"
+                    Content="Закрыть приложение" 
+                    Background="IndianRed"
+                    VerticalAlignment="Bottom"                    
+                    BorderBrush="Transparent"
+                    Click="CloseAppBtn_Click"/>
         </StackPanel>
 
-        <TextBox x:Name="SearchTB"
+        <!--StackPanel с RadioButton
+            которые выполняют задачу
+            вкладок(переключают меню)-->
+        <StackPanel Grid.Row="1">
+            <!--RadioButton(список юзеров)-->
+            <RadioButton Content="Список рабочих"
+                         Height="50"
+                         Foreground="White"
+                         FontSize="14"                        
+                         Checked="RadioButton_Checked"/>
+
+            <!--RadioButton(добавить юзера)-->
+            <RadioButton Content="Добавить рабочего"
+                         Height="50"
+                         Foreground="White"
+                         FontSize="14"                         
+                         Checked="RadioButton_Checked"/>
+            
+            <!--RadioButton(список объектов)-->
+            <RadioButton Content="Список объектов"
+                         Height="50"
+                         Foreground="White"
+                         FontSize="14"
+                         Checked="RadioButton_Checked"/>
+            
+            <!--RadioButton(добавить объект)-->
+            <RadioButton Content="Добавить объект"
+                         Height="50"
+                         Foreground="White"
+                         FontSize="14"
+                         Checked="RadioButton_Checked"/>
+
+            <!--RadioButton(работа на объекте)-->
+            <RadioButton Content="Работы на объекте"
+                         Height="50"
+                         Foreground="White"
+                         FontSize="14"
+                         Checked="RadioButton_Checked"/>
+
+            <!--RadioButton(добавить работу)-->
+            <RadioButton Content="Добавить работу"
+                         Height="50"
+                         Foreground="White"
+                         FontSize="14"
+                         Checked="RadioButton_Checked"/>
+        </StackPanel>
+
+        <!--Поле поиска в списке.
+            Относится к гриду со списком.-->
+        <TextBox x:Name="SearchTB" Visibility="Hidden"
                 Width="250"
                  Height="40"
                  VerticalContentAlignment="Center"
                  HorizontalAlignment="Left"
                  Margin="35,0,0,0"
                  Grid.Column="1"
-                 Style="{StaticResource ModernTextBox}"
-                 Visibility="Hidden"/>
-
-        <Grid x:Name="GridListWorkers"
-              Grid.Row="1" Grid.Column="1"
-              Visibility="Hidden">
+                 TextChanged="SearchTB_TextChanged"/>
+        <!--Grid со списком
+            строителей-->
+        <Grid x:Name="GridListBuilders" Visibility="Hidden"
+              Grid.Row="1" Grid.Column="1">
             <DataGrid x:Name="ListWorkersDG"
                   AutoGenerateColumns="False"
                   ScrollViewer.CanContentScroll="True"
                      ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                <!--Колонки в таблице-->
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="№ п/п"
                                     Binding="{Binding IdWorkers}"
@@ -109,6 +144,7 @@
                                     Binding="{Binding DateOfBirthWorker}"
                                     Width="150"/>
                 </DataGrid.Columns>
+                <!--Окошко с доп.инфой-->
                 <DataGrid.RowDetailsTemplate>
                     <DataTemplate>
                         <Border BorderThickness="0" Background="Transparent" Padding="10">
@@ -118,17 +154,17 @@
                                                FontWeight="Bold"
                                                FontFamily="Yu Gothic UI Bold"
                                                VerticalAlignment="Center" />
-                                    <TextBlock FontSize="16" Foreground="White" 
+                                    <TextBlock FontSize="16" 
                                                Text="{Binding CitizenshipName}" 
                                                VerticalAlignment="Center" />
                                 </StackPanel>
-                                                 
+
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock FontSize="14" Text="Специальность: "
                                                 FontWeight="Bold"
                                                FontFamily="Yu Gothic UI Bold"
                                                VerticalAlignment="Center" />
-                                    <TextBlock FontSize="16" Foreground="White" 
+                                    <TextBlock FontSize="16" 
                                                Text="{Binding NameSpecialty}" 
                                                VerticalAlignment="Center" />
                                 </StackPanel>
@@ -138,7 +174,7 @@
                                                 FontWeight="Bold"
                                                FontFamily="Yu Gothic UI Bold"
                                                VerticalAlignment="Center" />
-                                    <TextBlock FontSize="16" Foreground="White" 
+                                    <TextBlock FontSize="16" 
                                                Text="{Binding NamePost}" 
                                                VerticalAlignment="Center" />
                                 </StackPanel>
@@ -148,7 +184,7 @@
                                                 FontWeight="Bold"
                                                FontFamily="Yu Gothic UI Bold"
                                                VerticalAlignment="Center" />
-                                    <TextBlock FontSize="16" Foreground="White" 
+                                    <TextBlock FontSize="16" 
                                                Text="{Binding NameBrigade}" 
                                                VerticalAlignment="Center" />
                                 </StackPanel>
@@ -158,7 +194,7 @@
                                                 FontWeight="Bold"
                                                FontFamily="Yu Gothic UI Bold"
                                                VerticalAlignment="Center" />
-                                    <TextBlock FontSize="16" Foreground="White" 
+                                    <TextBlock FontSize="16" 
                                                Text="{Binding PhoneNumberWorker}" 
                                                VerticalAlignment="Center" />
                                 </StackPanel>
@@ -168,7 +204,7 @@
                                                 FontWeight="Bold"
                                                FontFamily="Yu Gothic UI Bold"
                                                VerticalAlignment="Center" />
-                                    <TextBlock FontSize="16" Foreground="White" 
+                                    <TextBlock FontSize="16" 
                                                Text="{Binding EmailWorker}" 
                                                VerticalAlignment="Center" />
                                 </StackPanel>
@@ -177,6 +213,103 @@
                     </DataTemplate>
                 </DataGrid.RowDetailsTemplate>
             </DataGrid>
+        </Grid>
+        <!--Grid с добавлением строителей-->
+        <Grid x:Name="GridAddBuilders"
+              Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <!--Колонка-1-->
+            <StackPanel>
+                <!--Фамилия-->
+                <TextBox x:Name="LastNameWorker"
+                    Margin="0,40,0,0"
+                    Width="200" Height="30"/>
+                <!--Имя-->
+                <TextBox x:Name="FirstNameWorker"
+                    Margin="0,40,0,0"
+                    Width="200" Height="30"/>
+                <!--Отчество(необязательно)-->
+                <TextBox x:Name="MiddleNameWorker"
+                    Margin="0,40,0,0"
+                    Width="200" Height="30"/>
+                <!--Дата рождения-->
+                <DatePicker x:Name="DateOfBirthDP"
+                            Width="200"
+                            Margin="0,35,0,0"
+                            SelectedDateChanged="DateOfBirthDP_SelectedDateChanged"/>
+            </StackPanel>
+            
+            <!--Колонка-2-->
+            <StackPanel Grid.Column="1">
+                <!--Специальность-->
+                <ComboBox x:Name="SpecialtyCB"
+                          Width="200" Height="30"
+                          Margin="0,40,0,0"/>
+                <!--Должность-->
+                <ComboBox x:Name="PostCB"
+                          Width="200" Height="30"
+                          Margin="0,40,0,0"/>
+                <!--Бригада-->
+                <ComboBox x:Name="BrigadeCB"
+                          Width="200" Height="30"
+                          Margin="0,40,0,0"/>
+                <!--Гражданство-->
+                <ComboBox x:Name="CitizenshipCB"
+                          Width="200" Height="30"
+                          Margin="0,30,0,0"/>
+
+                <!--Button добавления рабочего-->
+                <Button x:Name="AddWorkerBtn"
+                    Margin="0,20,0,0"
+                    Content="Добавить рабочего"
+                    Width="200" Height="40"
+                    Click="AddWorkerBtn_Click"/>
+            </StackPanel>
+            
+            <!--Колонка-3-->
+            <StackPanel Grid.Column="2">
+                <!--Номер телефона-->
+                <TextBox x:Name="PhoneNumberTB"
+                    Margin="0,40,0,0"
+                    Width="200" Height="30"/>
+                <!--Эмейл-->
+                <TextBox x:Name="EmailTB"
+                    Margin="0,40,0,0"
+                    Width="200" Height="30"/>
+            </StackPanel>
+        </Grid>
+        
+        <!--Grid с объектами-->
+        <Grid x:Name="GridListObjects"
+              Grid.Row="1" Grid.Column="1"
+              Visibility="Hidden">
+
+        </Grid>
+        
+        <!--Grid с добавлением объектов-->
+        <Grid x:Name="GridAddObjects"
+              Grid.Row="1" Grid.Column="1"
+              Visibility="Hidden">
+            
+        </Grid>
+        
+        <!--Grid с добавлением работ на объекте-->
+        <Grid x:Name="GridAddWorkOnObject"
+              Grid.Row="1" Grid.Column="1"
+              Visibility="Hidden">
+            
+        </Grid>
+        
+        <!--Grid с добавлением работ-->
+        <Grid x:Name="GridAddWork"
+              Grid.Row="1" Grid.Column="1"
+              Visibility="Hidden">
+            
         </Grid>
     </Grid>
 </Window>

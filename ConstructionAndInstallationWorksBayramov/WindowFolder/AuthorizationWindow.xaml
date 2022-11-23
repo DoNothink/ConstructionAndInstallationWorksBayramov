@@ -51,8 +51,7 @@
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center">
                 <TextBox x:Name="LoginTB"
-                    FontFamily="Yu Gothic UI Light"
-                     Text="логин"
+                    FontFamily="Yu Gothic UI Light"                    
                      FontSize="20"
                      HorizontalAlignment="Center"
                      Foreground="White"
@@ -72,7 +71,6 @@
                         Margin="0,20,0,0">
                 <PasswordBox x:Name="PasswordPB"
                      FontFamily="Yu Gothic UI Light"
-                     Password="пароль"
                      FontSize="20"
                      HorizontalAlignment="Center"
                      Foreground="White"
@@ -95,7 +93,5 @@
                         Click="LogInBtn_Click"/>
             </StackPanel>
         </StackPanel>
-        
-        
     </Grid>
 </Window>

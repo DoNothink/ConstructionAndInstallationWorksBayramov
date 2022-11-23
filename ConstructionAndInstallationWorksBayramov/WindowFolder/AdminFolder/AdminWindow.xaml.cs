@@ -24,15 +24,15 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder.AdminFolder
         CBClass cBClass = new CBClass();
         DGClass dGClass;
         SqlConnection sqlConnection =
-            new SqlConnection(@"Data Source=K218PC\SQLEXPRESS;" +
-                "Initial Catalog=ConstructionAndInstallationWorksBayramov;" +
-                "Integrated Security=True");
+            new SqlConnection(@"Data Source=DESKTOP-D69MI98;
+                    Initial Catalog=ConstructionAndInstallationWorksBayramov;
+                    Integrated Security=True");
         SqlCommand sqlCommand;
 
         public AdminWindow()
         {
             InitializeComponent();
-            cBClass.RoleCBLoad(RoleCB);
+            cBClass.CBLoad(RoleCB, "Role", "IdRole", "RoleName");
             dGClass = new DGClass(ListUserDG);
         }
 
@@ -99,26 +99,108 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder.AdminFolder
         /// </summary>
         private void AddUserBtn_Click(object sender, RoutedEventArgs e)
         {
-            try
+            string pass = PasswordPB.Password;
+            string zagl = "QWERTYUIOPASDFGHJKLZXCVBNM";
+            string mal = "qwertyuiopasdfghjklzxcvbnm";
+            string cif = "1234567890";
+            string znak = "!@#$%^&*()_+=-№";
+
+            if (string.IsNullOrWhiteSpace(LoginTB.Text))
             {
-                sqlConnection.Open();
-                sqlCommand = new SqlCommand("Insert into dbo.[User] " +
-                    "([Login], [Password], IdRole) " +
-                    $"Values ('{LoginTB.Text}', " +
-                    $"'{PasswordPB.Password}', " +
-                    $"'{RoleCB.SelectedValue.ToString()}')", sqlConnection);
-                sqlCommand.ExecuteNonQuery();
-                MBClass.InfoMB($"Пользователь {LoginTB.Text} " +
-                    $"успешно добавлен");
+                MBClass.ErrorMB("Вы не ввели логин");
+                LoginTB.Focus();
             }
-            catch (Exception ex)
+            else if (string.IsNullOrWhiteSpace(PasswordPB.Password))
             {
-                MBClass.ErrorMB(ex);
+                MBClass.ErrorMB("Вы не ввели пароль");
+                PasswordPB.Focus();
             }
-            finally
+            else if (zagl.IndexOfAny(pass.ToCharArray()) == -1)
             {
-                sqlConnection.Close();
-                dGClass.LoadDG("SELECT * FROM dbo.[UserView]");
+                MBClass.ErrorMB("Пароль должен содержать прописную букву");
+                PasswordPB.Focus();
+            }
+            else if (mal.IndexOfAny(pass.ToCharArray()) == -1)
+            {
+                MBClass.ErrorMB("Пароль должен содержать строчную букву");
+                PasswordPB.Focus();
+            }
+            else if (cif.IndexOfAny(pass.ToCharArray()) == -1)
+            {
+                MBClass.ErrorMB("Пароль должен содержать цифру");
+                PasswordPB.Focus();
+            }
+            else if (znak.IndexOfAny(pass.ToCharArray()) == -1)
+            {
+                MBClass.ErrorMB("Пароль должен содержать " +
+                    "один из следующих знаков: " + znak);
+                PasswordPB.Focus();
+            }
+            else if (RoleCB.SelectedIndex == -1)
+            {
+                MBClass.ErrorMB("Выберите роль");
+                RoleCB.Focus();
+            }
+            else
+            {                
+                try
+                {
+                    sqlConnection.Open();
+                    sqlCommand = new SqlCommand("Insert into dbo.[User] " +
+                        "([LoginUser], [PasswordUser], IdRole) " +
+                        $"Values ('{LoginTB.Text}', " +
+                        $"'{PasswordPB.Password}', " +
+                        $"'{RoleCB.SelectedValue.ToString()}')", sqlConnection);
+                    sqlCommand.ExecuteNonQuery();
+                    MBClass.InfoMB($"Пользователь {LoginTB.Text} " +
+                        $"успешно добавлен");
+                }
+                catch (Exception ex)
+                {
+                    MBClass.ErrorMB(ex);
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                    dGClass.LoadDG("SELECT * FROM dbo.[UserView]");
+                }            
+            }
+        }
+
+        /// <summary>
+        /// Обработчик поиска в 
+        /// DataGrid
+        /// </summary>
+        private void SearchTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            dGClass.LoadDG("Select * From dbo.[UserView] " +
+                $"Where LoginUser Like '%{SearchTB.Text}%' " +
+                $"OR RoleName Like '%{SearchTB.Text}%'");
+        }
+
+        /// <summary>
+        /// Обработчик DataGrid,
+        /// отвечающий за запуск окна редактирования
+        /// выбранного пользователя
+        /// </summary>
+        private void ListUserDG_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if(ListUserDG.SelectedItem == null)
+            {
+                MBClass.ErrorMB("Вы не выбрали строку");
+            }
+            else
+            {
+                try
+                {
+                    VariableClass.UserId = dGClass.SelectId();
+                    new EditUserWindow().Show();
+                    dGClass.LoadDG("Select * From dbo.[UserView]");
+                }
+                catch (Exception ex)
+                {
+                    MBClass.ErrorMB(ex);
+                }
             }
         }
     }
