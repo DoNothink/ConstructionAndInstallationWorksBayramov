@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ConstructionAndInstallationWorksBayramov.WindowFolder;
 
 namespace ConstructionAndInstallationWorksBayramov.WindowFolder.BrigadierFolder
 {
@@ -32,12 +33,11 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder.BrigadierFolder
         public BrigadierWindow()
         {
             InitializeComponent();
-
+            dGClass = new DGClass(ListWorkersDG);
             cBClass.CBLoad(CitizenshipCB, "Citizenship", "IdCitizenship", "CitizenshipName");
             cBClass.CBLoad(SpecialtyCB, "Specialty", "IdSpecialty", "NameSpecialty");
             cBClass.CBLoad(PostCB, "Post", "IdPost", "NamePost");
             cBClass.CBLoad(BrigadeCB, "Brigade", "IdBrigade", "NameBrigade");
-            dGClass = new DGClass(ListWorkersDG);
         }
         /// <summary>
         /// Метод обработки RadioButton,
@@ -53,6 +53,7 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder.BrigadierFolder
                     GridListBuilders.Visibility = Visibility.Visible; //вкл. грид+список
                     SearchTB.Visibility = Visibility.Visible; //вкл. поискТБ
                     GridAddBuilders.Visibility = Visibility.Hidden; //выкл. грид с добавлением
+                    dGClass.LoadDG("SELECT * FROM dbo.[WorkersView]");
                     break;
 
                 case "Добавить рабочего":
@@ -105,9 +106,12 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder.BrigadierFolder
         /// </summary>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            dGClass.LoadDG("SELECT * FROM dbo.[WorkersView]");
+            dGClass.LoadDG("SELECT * FROM dbo.[ObjectView]");
         }
 
+        /// <summary>
+        /// Кнопка добавления рабочего
+        /// </summary>
         private void AddWorkerBtn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -151,6 +155,39 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder.BrigadierFolder
         {
             DateTime? selectedDate = DateOfBirthDP.SelectedDate;
             DateOfBirth = selectedDate.Value.ToShortDateString();
+        }
+
+        /// <summary>
+        /// Метод обработки кнопок добавления из окна
+        /// (добавить рабочего)
+        /// </summary>
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            switch ((sender as Button).Name)
+            {
+                case "AddSpecialtyBtn":
+                    new AddWorkerWindows.AddSpecialtyWindow().Show();
+                    break;
+                case "AddPostBtn":
+                    new AddWorkerWindows.AddPostWindow().Show();
+                    break;
+                case "AddBrigadeBtn":
+                    new AddWorkerWindows.AddBrigadeWindow().Show();
+                    break;
+                case "AddCitizenshipBtn":
+                    new AddWorkerWindows.AddCitizenshipWindow().Show();
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Кнопка, отправляющая
+        /// в окно редактирования
+        /// рабочего
+        /// </summary>
+        private void ListWorkersDG_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            new EditWorkerWindow().Show();
         }
     }
 }

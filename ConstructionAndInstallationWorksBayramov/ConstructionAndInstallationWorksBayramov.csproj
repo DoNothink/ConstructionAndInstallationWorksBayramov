@@ -73,8 +73,23 @@
     <Compile Include="WindowFolder\AuthorizationWindow.xaml.cs">
       <DependentUpon>AuthorizationWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WindowFolder\BrigadierFolder\AddWorkerWindows\AddBrigadeWindow.xaml.cs">
+      <DependentUpon>AddBrigadeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowFolder\BrigadierFolder\AddWorkerWindows\AddCitizenshipWindow.xaml.cs">
+      <DependentUpon>AddCitizenshipWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowFolder\BrigadierFolder\AddWorkerWindows\AddPostWindow.xaml.cs">
+      <DependentUpon>AddPostWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowFolder\BrigadierFolder\AddWorkerWindows\AddSpecialtyWindow.xaml.cs">
+      <DependentUpon>AddSpecialtyWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowFolder\BrigadierFolder\BrigadierWindow.xaml.cs">
       <DependentUpon>BrigadierWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowFolder\BrigadierFolder\EditWorkerWindow.xaml.cs">
+      <DependentUpon>EditWorkerWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -125,7 +140,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="WindowFolder\BrigadierFolder\AddWorkerWindows\AddBrigadeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowFolder\BrigadierFolder\AddWorkerWindows\AddCitizenshipWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowFolder\BrigadierFolder\AddWorkerWindows\AddPostWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowFolder\BrigadierFolder\AddWorkerWindows\AddSpecialtyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WindowFolder\BrigadierFolder\BrigadierWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowFolder\BrigadierFolder\EditWorkerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -145,5 +180,6 @@
   <ItemGroup>
     <Resource Include="ResourceFolder\lens.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

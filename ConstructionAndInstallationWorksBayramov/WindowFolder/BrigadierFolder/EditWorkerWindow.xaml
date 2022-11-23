@@ -1,0 +1,115 @@
+﻿<Window x:Class="ConstructionAndInstallationWorksBayramov.WindowFolder.BrigadierFolder.EditWorkerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ConstructionAndInstallationWorksBayramov.WindowFolder.BrigadierFolder"
+        mc:Ignorable="d"
+        Title="Редактирование: рабочий"
+        Height="320" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!--Колонка-1-->
+        <StackPanel>
+            <!--Фамилия-->
+            <Label Content="Фамилия*"
+                       HorizontalAlignment="Center"
+                       Foreground="White"/>
+            <TextBox x:Name="LastNameWorker"
+                    Margin="0,0,0,0"
+                    Width="200" Height="30"/>
+
+            <!--Имя-->
+            <Label Content="Имя*"
+                       HorizontalAlignment="Center"
+                       Foreground="White"/>
+            <TextBox x:Name="FirstNameWorker"
+                    Margin="0,0,0,0"
+                    Width="200" Height="30"/>
+
+            <!--Отчество(необязательно)-->
+            <Label Content="Отчество"
+                       HorizontalAlignment="Center"
+                       Foreground="White"/>
+            <TextBox x:Name="MiddleNameWorker"
+                    Margin="0,0,0,0"
+                    Width="200" Height="30"/>
+
+            <!--Дата рождения-->
+            <Label Content="Дата рождения*"
+                       HorizontalAlignment="Center"
+                       Foreground="White"/>
+            <DatePicker x:Name="DateOfBirthDP"
+                            Width="200"
+                            Margin="0,5,0,0"
+                            SelectedDateChanged="DateOfBirthDP_SelectedDateChanged"/>
+        </StackPanel>
+
+        <!--Колонка-2(с ComboBox)-->
+        <StackPanel Grid.Column="1">
+            <!--Специальность-->
+            <Label Content="Специальность*"
+                       HorizontalAlignment="Center"
+                       Foreground="White"/>
+            <ComboBox x:Name="SpecialtyCB"
+                          Width="200" Height="30"
+                          Margin="0,0,0,0"/>
+
+            <!--Должность-->
+            <Label Content="Должность*"
+                       HorizontalAlignment="Center"
+                       Foreground="White"/>
+            <ComboBox x:Name="PostCB"
+                          Width="200" Height="30"
+                          Margin="0,0,0,0"/>
+
+            <!--Бригада-->
+            <Label Content="Бригада*"
+                       HorizontalAlignment="Center"
+                       Foreground="White"/>
+
+            <ComboBox x:Name="BrigadeCB"
+                          Width="200" Height="30"
+                          Margin="0,0,0,0"/>
+
+            <!--Гражданство-->
+            <Label Content="Гражданство*"
+                       HorizontalAlignment="Center"
+                       Foreground="White"/>
+
+            <ComboBox x:Name="CitizenshipCB"
+                          Width="200" Height="30"
+                          Margin="0,0,0,0"/>
+
+            <!--Button добавления рабочего-->
+            <Button x:Name="EditWorkerBtn"
+                    Margin="0,20,0,0"
+                    Content="Редактировать"
+                    Width="200" Height="40"
+                    Click="EditWorkerBtn_Click"/>
+        </StackPanel>
+
+        <!--Колонка-3-->
+        <StackPanel Grid.Column="2">
+            <!--Номер телефона-->
+            <Label Content="Номер телефона*"
+                       HorizontalAlignment="Center"
+                       Foreground="White"/>
+            <TextBox x:Name="PhoneNumberTB"
+                    Margin="0,0,0,0"
+                    Width="200" Height="30"/>
+            <!--Эмейл-->
+            <Label Content="Электронная почта*"
+                       HorizontalAlignment="Center"
+                       Foreground="White"/>
+            <TextBox x:Name="EmailTB"
+                    Margin="0,0,0,0"
+                    Width="200" Height="30"/>
+        </StackPanel>
+    </Grid>
+</Window>

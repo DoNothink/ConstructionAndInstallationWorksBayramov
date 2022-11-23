@@ -100,12 +100,6 @@
                          FontSize="14"
                          Checked="RadioButton_Checked"/>
 
-            <!--RadioButton(добавить работу)-->
-            <RadioButton Content="Добавить работу"
-                         Height="50"
-                         Foreground="White"
-                         FontSize="14"
-                         Checked="RadioButton_Checked"/>
         </StackPanel>
 
         <!--Поле поиска в списке.
@@ -120,12 +114,14 @@
                  TextChanged="SearchTB_TextChanged"/>
         <!--Grid со списком
             строителей-->
-        <Grid x:Name="GridListBuilders" Visibility="Hidden"
+        <Grid x:Name="GridListBuilders" Visibility="Visible"
               Grid.Row="1" Grid.Column="1">
             <DataGrid x:Name="ListWorkersDG"
                   AutoGenerateColumns="False"
+                      IsReadOnly="True"
                   ScrollViewer.CanContentScroll="True"
-                     ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                     ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                      MouseDoubleClick="ListWorkersDG_MouseDoubleClick">
                 <!--Колонки в таблице-->
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="№ п/п"
@@ -216,7 +212,8 @@
         </Grid>
         <!--Grid с добавлением строителей-->
         <Grid x:Name="GridAddBuilders"
-              Grid.Row="1" Grid.Column="1">
+              Grid.Row="1" Grid.Column="1"
+              Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -226,42 +223,104 @@
             <!--Колонка-1-->
             <StackPanel>
                 <!--Фамилия-->
+                <Label Content="Фамилия*"
+                       HorizontalAlignment="Center"
+                       Foreground="White"/>
                 <TextBox x:Name="LastNameWorker"
-                    Margin="0,40,0,0"
+                    Margin="0,0,0,0"
                     Width="200" Height="30"/>
+
                 <!--Имя-->
+                <Label Content="Имя*"
+                       HorizontalAlignment="Center"
+                       Foreground="White"/>
                 <TextBox x:Name="FirstNameWorker"
-                    Margin="0,40,0,0"
+                    Margin="0,0,0,0"
                     Width="200" Height="30"/>
+
                 <!--Отчество(необязательно)-->
+                <Label Content="Отчество"
+                       HorizontalAlignment="Center"
+                       Foreground="White"/>
                 <TextBox x:Name="MiddleNameWorker"
-                    Margin="0,40,0,0"
+                    Margin="0,0,0,0"
                     Width="200" Height="30"/>
+
                 <!--Дата рождения-->
+                <Label Content="Дата рождения*"
+                       HorizontalAlignment="Center"
+                       Foreground="White"/>
                 <DatePicker x:Name="DateOfBirthDP"
                             Width="200"
-                            Margin="0,35,0,0"
+                            Margin="0,5,0,0"
                             SelectedDateChanged="DateOfBirthDP_SelectedDateChanged"/>
             </StackPanel>
             
-            <!--Колонка-2-->
+            <!--Колонка-2(с ComboBox)-->
             <StackPanel Grid.Column="1">
                 <!--Специальность-->
-                <ComboBox x:Name="SpecialtyCB"
+                <Label Content="Специальность*"
+                       HorizontalAlignment="Center"
+                       Foreground="White"/>
+                <StackPanel Orientation="Horizontal">
+                    
+                    <ComboBox x:Name="SpecialtyCB"
                           Width="200" Height="30"
-                          Margin="0,40,0,0"/>
+                          Margin="0,0,0,0"/>
+                    
+                    <Button x:Name="AddSpecialtyBtn"
+                        Content="+" Width="30"
+                            Margin="10,0,0,0"
+                            Click="Button_Click"/>
+                </StackPanel>
+                
                 <!--Должность-->
-                <ComboBox x:Name="PostCB"
+                <Label Content="Должность*"
+                       HorizontalAlignment="Center"
+                       Foreground="White"/>
+                <StackPanel Orientation="Horizontal">
+                    
+                    <ComboBox x:Name="PostCB"
                           Width="200" Height="30"
-                          Margin="0,40,0,0"/>
+                          Margin="0,0,0,0"/>
+                    
+                    <Button x:Name="AddPostBtn"
+                        Content="+" Width="30"
+                            Margin="10,0,0,0"
+                            Click="Button_Click"/>
+                </StackPanel>
+                
                 <!--Бригада-->
-                <ComboBox x:Name="BrigadeCB"
+                <Label Content="Бригада*"
+                       HorizontalAlignment="Center"
+                       Foreground="White"/>
+                <StackPanel Orientation="Horizontal">
+                    
+                    <ComboBox x:Name="BrigadeCB"
                           Width="200" Height="30"
-                          Margin="0,40,0,0"/>
+                          Margin="0,0,0,0"/>
+                    
+                    <Button x:Name="AddBrigadeBtn"
+                        Content="+" Width="30"
+                            Margin="10,0,0,0"
+                        Click="Button_Click"/>
+                </StackPanel>
+                
                 <!--Гражданство-->
-                <ComboBox x:Name="CitizenshipCB"
+                <Label Content="Гражданство*"
+                       HorizontalAlignment="Center"
+                       Foreground="White"/>
+                <StackPanel Orientation="Horizontal">
+                    
+                    <ComboBox x:Name="CitizenshipCB"
                           Width="200" Height="30"
-                          Margin="0,30,0,0"/>
+                          Margin="0,0,0,0"/>
+                    
+                    <Button x:Name="AddCitizenshipBtn"
+                        Content="+" Width="30"
+                            Margin="10,0,0,0"
+                            Click="Button_Click"/>
+                </StackPanel>
 
                 <!--Button добавления рабочего-->
                 <Button x:Name="AddWorkerBtn"
@@ -274,12 +333,18 @@
             <!--Колонка-3-->
             <StackPanel Grid.Column="2">
                 <!--Номер телефона-->
+                <Label Content="Номер телефона*"
+                       HorizontalAlignment="Center"
+                       Foreground="White"/>
                 <TextBox x:Name="PhoneNumberTB"
-                    Margin="0,40,0,0"
+                    Margin="0,0,0,0"
                     Width="200" Height="30"/>
                 <!--Эмейл-->
+                <Label Content="Электронная почта*"
+                       HorizontalAlignment="Center"
+                       Foreground="White"/>
                 <TextBox x:Name="EmailTB"
-                    Margin="0,40,0,0"
+                    Margin="0,0,0,0"
                     Width="200" Height="30"/>
             </StackPanel>
         </Grid>
@@ -289,6 +354,78 @@
               Grid.Row="1" Grid.Column="1"
               Visibility="Hidden">
 
+            <DataGrid x:Name="ListObjectDG"
+                  AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                  ScrollViewer.CanContentScroll="True"
+                     ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                <!--Колонки в таблице-->
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="№ п/п"
+                                    Binding="{Binding IdObject}"
+                                    Width="50"/>
+                    <DataGridTextColumn Header="Тип объекта"
+                                    Binding="{Binding NameTypeOfObject}"
+                                    Width="100"/>
+                    <DataGridTextColumn Header="Название ЖК"
+                                    Binding="{Binding NameHousingComplex}"
+                                    Width="100"/>
+                    <DataGridTextColumn Header="Регион"
+                                    Binding="{Binding NameRegion}"
+                                    Width="100"/>
+                    <DataGridTextColumn Header="Город"
+                                    Binding="{Binding CityName}"
+                                    Width="150"/>
+                </DataGrid.Columns>
+                <!--Окошко с доп.инфой-->
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="0" Background="Transparent" Padding="10">
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="14" Text="Улица: " 
+                                               FontWeight="Bold"
+                                               FontFamily="Yu Gothic UI Bold"
+                                               VerticalAlignment="Center" />
+                                    <TextBlock FontSize="16" 
+                                               Text="{Binding NameStreet}" 
+                                               VerticalAlignment="Center" />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="14" Text="Корпус дома: "
+                                                FontWeight="Bold"
+                                               FontFamily="Yu Gothic UI Bold"
+                                               VerticalAlignment="Center" />
+                                    <TextBlock FontSize="16" 
+                                               Text="{Binding HouseFrame}" 
+                                               VerticalAlignment="Center" />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="14" Text="Номер дома: "
+                                                FontWeight="Bold"
+                                               FontFamily="Yu Gothic UI Bold"
+                                               VerticalAlignment="Center" />
+                                    <TextBlock FontSize="16" 
+                                               Text="{Binding HouseNumber}" 
+                                               VerticalAlignment="Center" />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="14" Text="Номер квартиры: "
+                                                FontWeight="Bold"
+                                               FontFamily="Yu Gothic UI Bold"
+                                               VerticalAlignment="Center" />
+                                    <TextBlock FontSize="16" 
+                                               Text="{Binding ApartmentNumber}" 
+                                               VerticalAlignment="Center" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+            </DataGrid>
         </Grid>
         
         <!--Grid с добавлением объектов-->
@@ -302,14 +439,8 @@
         <Grid x:Name="GridAddWorkOnObject"
               Grid.Row="1" Grid.Column="1"
               Visibility="Hidden">
-            
+
         </Grid>
         
-        <!--Grid с добавлением работ-->
-        <Grid x:Name="GridAddWork"
-              Grid.Row="1" Grid.Column="1"
-              Visibility="Hidden">
-            
-        </Grid>
     </Grid>
 </Window>
