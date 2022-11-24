@@ -28,5 +28,10 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder.BrigadierFolder
         {
 
         }
+
+        private void DateOfBirthDP_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

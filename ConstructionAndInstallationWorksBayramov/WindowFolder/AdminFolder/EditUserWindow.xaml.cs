@@ -22,9 +22,7 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder.AdminFolder
     public partial class EditUserWindow : Window
     {
         SqlConnection sqlConnection =
-            new SqlConnection(@"Data Source=DESKTOP-D69MI98;
-                    Initial Catalog=ConstructionAndInstallationWorksBayramov;
-                    Integrated Security=True");
+            new SqlConnection(GlobalClass.SqlConnection);
         SqlCommand sqlCommand;
         SqlDataReader dataReader;
         CBClass cBClass = new CBClass();
@@ -43,8 +41,8 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder.AdminFolder
                 sqlCommand =
                    new SqlCommand("Update " +
                    "dbo.[User] " +
-                   $"Set [LoginUser] = '{LoginTB.Text}', " +
-                   $"[PasswordUser] = '{PasswordPB.Password}', " +
+                   $"Set [Login] = '{LoginTB.Text}', " +
+                   $"[Password] = '{PasswordPB.Password}', " +
                    $"IdRole = '{RoleCB.SelectedValue.ToString()}' " +
                    $"Where IdUser = '{VariableClass.UserId}'", sqlConnection);
                 sqlCommand.ExecuteNonQuery();

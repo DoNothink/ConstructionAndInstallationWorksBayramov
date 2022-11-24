@@ -22,9 +22,7 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder
     public partial class AuthorizationWindow : Window
     {
         SqlConnection sqlConnection =
-            new SqlConnection(@"Data Source=DESKTOP-D69MI98;
-                    Initial Catalog=ConstructionAndInstallationWorksBayramov;
-                    Integrated Security=True");
+            new SqlConnection(GlobalClass.SqlConnection);
         SqlCommand sqlCommand;
         SqlDataReader sqlDataReader;
         public AuthorizationWindow()
@@ -48,7 +46,7 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder
                     sqlConnection.Open();
                     sqlCommand = new SqlCommand("SELECT * FROM " +
                         "dbo.[User] " +
-                        $"Where [LoginUser] = '{LoginTB.Text}'", sqlConnection);
+                        $"Where [Login] = '{LoginTB.Text}'", sqlConnection);
                     sqlDataReader = sqlCommand.ExecuteReader();
                     sqlDataReader.Read();
                     if (sqlDataReader[2].ToString() != PasswordPB.Password)

@@ -12,9 +12,7 @@ namespace ConstructionAndInstallationWorksBayramov.ClassFolder
     class DGClass
     {
         SqlConnection sqlConnection =
-            new SqlConnection(@"Data Source=DESKTOP-D69MI98;
-                    Initial Catalog=ConstructionAndInstallationWorksBayramov;
-                    Integrated Security=True");
+            new SqlConnection(GlobalClass.SqlConnection);
         SqlDataAdapter dataAdapter;
         DataGrid dataGrid;
         DataTable dataTable;

@@ -10,7 +10,8 @@
         MaxHeight="600" MaxWidth="1000"
         MinHeight="600" MinWidth="1000"
         Background="#282A3A"
-        Loaded="Window_Loaded">
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -56,7 +57,7 @@
                          Height="50"
                          Foreground="White"
                          FontSize="14"
-                         
+                         Style="{DynamicResource MenuButtonTheme}"
                          Checked="RadioButton_Checked"/>
             
             <!--RadioButton(добавить юзера)-->
@@ -64,7 +65,7 @@
                          Height="50"
                          Foreground="White"
                          FontSize="14"
-                         
+                         Style="{DynamicResource MenuButtonTheme}"
                          Checked="RadioButton_Checked"/>
         </StackPanel>
         
@@ -75,7 +76,7 @@
             <!--Button(Выход из аккаунта)-->
             <Button x:Name="LogOutBtn"
                     Content="Выход"
-                    
+                    Style="{DynamicResource Buttontest}"
                     Click="LogOutBtn_Click">
                 <!--Тень от кнопки-->
                 <Button.Effect>
@@ -93,7 +94,7 @@
                     Content="Закрыть приложение" 
                     Background="IndianRed"
                     VerticalAlignment="Bottom"
-                    
+                    Style="{DynamicResource Buttontest}"
                     BorderBrush="Transparent"
                     Click="CloseAppBtn_Click"/>
         </StackPanel>
@@ -126,10 +127,10 @@
                                     Binding="{Binding IdUser}"
                                     Width="50"/>
                     <DataGridTextColumn Header="Логин"
-                                    Binding="{Binding LoginUser}"
+                                    Binding="{Binding Login}"
                                     Width="100"/>
                     <DataGridTextColumn Header="Пароль"
-                                    Binding="{Binding PasswordUser}"
+                                    Binding="{Binding Password}"
                                     Width="100"/>
                     <DataGridTextColumn Header="Роль"
                                     Binding="{Binding RoleName}"
@@ -166,22 +167,44 @@
                 Логина и Пароля-->
             <StackPanel HorizontalAlignment="Center"
                         Grid.Column="1">
+                <Label Content="Логин"
+               FontSize="16"
+               FontWeight="Bold"
+               Foreground="White"
+               Margin="0,15,0,0"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"/>
                 <!--для Логина-->
                 <TextBox x:Name="LoginTB"
                     Width="200" Height="30"
-                    Margin="0,40,0,0"
+                    Margin="0,10,0,0"
                     >
                 </TextBox>
                 <!--для Пароля-->
+                <Label Content="Пароль"
+               FontSize="16"
+               FontWeight="Bold"
+               Foreground="White"
+               Margin="0,15,0,0"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"/>
                 <PasswordBox x:Name="PasswordPB"
                     Width="200" Height="30"
                     Margin="0,10,0,0"/>
+
+                <Label Content="Роль"
+               FontSize="16"
+               FontWeight="Bold"
+               Foreground="White"
+               Margin="0,15,0,0"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"/>
                 <ComboBox x:Name="RoleCB"
                           Width="200" Height="30"
-                          Margin="0,30,0,0"/>
+                          Margin="0,10,0,0"/>
                 <Button x:Name="AddUserBtn"
                     Margin="0,20,0,0"
-                    Content="Добавить пользователя"
+                    Content="Добавить"
                     Width="200" Height="50"
                     Click="AddUserBtn_Click"/>
             </StackPanel>

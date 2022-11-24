@@ -24,9 +24,7 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder.AdminFolder
         CBClass cBClass = new CBClass();
         DGClass dGClass;
         SqlConnection sqlConnection =
-            new SqlConnection(@"Data Source=DESKTOP-D69MI98;
-                    Initial Catalog=ConstructionAndInstallationWorksBayramov;
-                    Integrated Security=True");
+            new SqlConnection(GlobalClass.SqlConnection);
         SqlCommand sqlCommand;
 
         public AdminWindow()
@@ -50,6 +48,7 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder.AdminFolder
                     GridListUsers.Visibility = Visibility.Visible; //вкл. грид+список
                     SearchTB.Visibility = Visibility.Visible; //вкл. поискТБ
                     GridAddUser.Visibility = Visibility.Hidden; //выкл. грид с добавлением
+                    dGClass.LoadDG("SELECT * FROM dbo.[UserView]");
                     break;
 
                 case "Добавить пользователя":
@@ -147,7 +146,7 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder.AdminFolder
                 {
                     sqlConnection.Open();
                     sqlCommand = new SqlCommand("Insert into dbo.[User] " +
-                        "([LoginUser], [PasswordUser], IdRole) " +
+                        "([Login], [Password], IdRole) " +
                         $"Values ('{LoginTB.Text}', " +
                         $"'{PasswordPB.Password}', " +
                         $"'{RoleCB.SelectedValue.ToString()}')", sqlConnection);
@@ -174,7 +173,7 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder.AdminFolder
         private void SearchTB_TextChanged(object sender, TextChangedEventArgs e)
         {
             dGClass.LoadDG("Select * From dbo.[UserView] " +
-                $"Where LoginUser Like '%{SearchTB.Text}%' " +
+                $"Where Login Like '%{SearchTB.Text}%' " +
                 $"OR RoleName Like '%{SearchTB.Text}%'");
         }
 

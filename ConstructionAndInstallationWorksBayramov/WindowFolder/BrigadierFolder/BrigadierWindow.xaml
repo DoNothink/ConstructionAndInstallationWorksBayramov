@@ -7,8 +7,11 @@
         mc:Ignorable="d"
         Title="BrigadierWindow" 
         Height="700" Width="1000"
+        MaxHeight="700" MaxWidth="1000"
+        MinHeight="700" MinWidth="1000"
         Background="#282A3A"
-        Loaded="Window_Loaded">
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -16,11 +19,13 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
-            <RowDefinition/>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="575*"/>
         </Grid.RowDefinitions>
-
+       
+        
         <!--Панель справа-->
-        <Rectangle Grid.RowSpan="2"
+        <Rectangle Grid.RowSpan="3"
                    Grid.Column="0"
                    Fill="#D89216">
             <Rectangle.Effect>
@@ -33,13 +38,25 @@
             </Rectangle.Effect>
         </Rectangle>
 
+        <StackPanel>
+            <Image Source="/ResourceFolder/logogo.png" Width="50"
+                   Margin="0,10,0,0"/>
+            <Label Content="Stroim lomaem"
+                       FontFamily="Yu Gothic UI Light"
+                       FontSize="22"
+                       Foreground="White"
+                       HorizontalAlignment="Center"/>
+        </StackPanel>
+        
         <!--StackPanel с кнопками
             Выхода из аккаунта и закрытия
             приложения-->
-        <StackPanel Grid.Row="1" VerticalAlignment="Bottom">
+        <StackPanel Grid.Row="2" VerticalAlignment="Bottom" Margin="0,0,0,0">
             <!--Button(Выход из аккаунта)-->
             <Button x:Name="LogOutBtn"
-                    Content="Выход"                   
+                    Content="Выход" 
+                    Margin="0"
+                    Style="{DynamicResource Buttontest}"                    
                     Click="LogOutBtn_Click">
                 <!--Тень от кнопки-->
                 <Button.Effect>
@@ -58,48 +75,37 @@
                     Background="IndianRed"
                     VerticalAlignment="Bottom"                    
                     BorderBrush="Transparent"
+                    Style="{DynamicResource Buttontest}"
                     Click="CloseAppBtn_Click"/>
         </StackPanel>
 
         <!--StackPanel с RadioButton
             которые выполняют задачу
             вкладок(переключают меню)-->
-        <StackPanel Grid.Row="1">
+        <StackPanel Grid.Row="1" Grid.RowSpan="2">
             <!--RadioButton(список юзеров)-->
             <RadioButton Content="Список рабочих"
                          Height="50"
                          Foreground="White"
-                         FontSize="14"                        
+                         FontSize="14"    
+                         Style="{DynamicResource MenuButtonTheme}"
                          Checked="RadioButton_Checked"/>
 
             <!--RadioButton(добавить юзера)-->
             <RadioButton Content="Добавить рабочего"
                          Height="50"
                          Foreground="White"
-                         FontSize="14"                         
+                         FontSize="14"      
+                         Style="{DynamicResource MenuButtonTheme}"
                          Checked="RadioButton_Checked"/>
-            
+
             <!--RadioButton(список объектов)-->
             <RadioButton Content="Список объектов"
                          Height="50"
                          Foreground="White"
                          FontSize="14"
+                         Style="{DynamicResource MenuButtonTheme}"
                          Checked="RadioButton_Checked"/>
-            
-            <!--RadioButton(добавить объект)-->
-            <RadioButton Content="Добавить объект"
-                         Height="50"
-                         Foreground="White"
-                         FontSize="14"
-                         Checked="RadioButton_Checked"/>
-
-            <!--RadioButton(работа на объекте)-->
-            <RadioButton Content="Работы на объекте"
-                         Height="50"
-                         Foreground="White"
-                         FontSize="14"
-                         Checked="RadioButton_Checked"/>
-
         </StackPanel>
 
         <!--Поле поиска в списке.
@@ -109,13 +115,26 @@
                  Height="40"
                  VerticalContentAlignment="Center"
                  HorizontalAlignment="Left"
-                 Margin="35,0,0,0"
+                 Margin="35,30,0,30"
                  Grid.Column="1"
                  TextChanged="SearchTB_TextChanged"/>
         <!--Grid со списком
             строителей-->
-        <Grid x:Name="GridListBuilders" Visibility="Visible"
-              Grid.Row="1" Grid.Column="1">
+        <Grid x:Name="GridListBuilders" Visibility="Hidden"
+              Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
+
+            <Rectangle Grid.ColumnSpan="3" 
+                       Fill="#46495d"
+                       Margin="0">
+                <Rectangle.Effect>
+                    <DropShadowEffect
+                    ShadowDepth="10" 
+                    Direction="70"
+                    Color="Black"
+                    Opacity="0.6"
+                    BlurRadius="100"/>
+                </Rectangle.Effect>
+            </Rectangle>
             <DataGrid x:Name="ListWorkersDG"
                   AutoGenerateColumns="False"
                       IsReadOnly="True"
@@ -213,12 +232,25 @@
         <!--Grid с добавлением строителей-->
         <Grid x:Name="GridAddBuilders"
               Grid.Row="1" Grid.Column="1"
-              Visibility="Hidden">
+              Visibility="Hidden" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+            <!--Плашка для ТБ/ПБ-->
+            <Rectangle Grid.ColumnSpan="3" 
+                       Fill="#46495d"
+                       Margin="0">
+                <Rectangle.Effect>
+                    <DropShadowEffect
+                    ShadowDepth="10" 
+                    Direction="70"
+                    Color="Black"
+                    Opacity="0.6"
+                    BlurRadius="100"/>
+                </Rectangle.Effect>
+            </Rectangle>
 
             <!--Колонка-1-->
             <StackPanel>
@@ -255,7 +287,7 @@
                             Margin="0,5,0,0"
                             SelectedDateChanged="DateOfBirthDP_SelectedDateChanged"/>
             </StackPanel>
-            
+
             <!--Колонка-2(с ComboBox)-->
             <StackPanel Grid.Column="1">
                 <!--Специальность-->
@@ -263,73 +295,92 @@
                        HorizontalAlignment="Center"
                        Foreground="White"/>
                 <StackPanel Orientation="Horizontal">
-                    
+
                     <ComboBox x:Name="SpecialtyCB"
                           Width="200" Height="30"
                           Margin="0,0,0,0"/>
-                    
+
                     <Button x:Name="AddSpecialtyBtn"
                         Content="+" Width="30"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center"
                             Margin="10,0,0,0"
                             Click="Button_Click"/>
                 </StackPanel>
-                
+
                 <!--Должность-->
                 <Label Content="Должность*"
                        HorizontalAlignment="Center"
                        Foreground="White"/>
                 <StackPanel Orientation="Horizontal">
-                    
+
                     <ComboBox x:Name="PostCB"
                           Width="200" Height="30"
                           Margin="0,0,0,0"/>
-                    
+
                     <Button x:Name="AddPostBtn"
                         Content="+" Width="30"
                             Margin="10,0,0,0"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center"
                             Click="Button_Click"/>
                 </StackPanel>
-                
+
                 <!--Бригада-->
                 <Label Content="Бригада*"
                        HorizontalAlignment="Center"
                        Foreground="White"/>
                 <StackPanel Orientation="Horizontal">
-                    
+
                     <ComboBox x:Name="BrigadeCB"
                           Width="200" Height="30"
                           Margin="0,0,0,0"/>
-                    
+
                     <Button x:Name="AddBrigadeBtn"
                         Content="+" Width="30"
                             Margin="10,0,0,0"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center"
                         Click="Button_Click"/>
                 </StackPanel>
-                
+
                 <!--Гражданство-->
                 <Label Content="Гражданство*"
                        HorizontalAlignment="Center"
                        Foreground="White"/>
                 <StackPanel Orientation="Horizontal">
-                    
+
                     <ComboBox x:Name="CitizenshipCB"
                           Width="200" Height="30"
                           Margin="0,0,0,0"/>
-                    
+
                     <Button x:Name="AddCitizenshipBtn"
                         Content="+" Width="30"
                             Margin="10,0,0,0"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center"
                             Click="Button_Click"/>
                 </StackPanel>
 
-                <!--Button добавления рабочего-->
-                <Button x:Name="AddWorkerBtn"
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="UpdAddBtn"
+                            Margin="0,20,0,0"
+                            Width="30"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            Click="UpdAddBtn_Click">
+                        <Image Source="/ResourceFolder/upd.png"/>
+                    </Button>
+
+                    <!--Button добавления рабочего-->
+                    <Button x:Name="AddWorkerBtn"
                     Margin="0,20,0,0"
                     Content="Добавить рабочего"
                     Width="200" Height="40"
                     Click="AddWorkerBtn_Click"/>
+                </StackPanel>
             </StackPanel>
-            
+
             <!--Колонка-3-->
             <StackPanel Grid.Column="2">
                 <!--Номер телефона-->
@@ -348,11 +399,24 @@
                     Width="200" Height="30"/>
             </StackPanel>
         </Grid>
-        
+
         <!--Grid с объектами-->
         <Grid x:Name="GridListObjects"
               Grid.Row="1" Grid.Column="1"
-              Visibility="Hidden">
+              Visibility="Hidden" Grid.RowSpan="2">
+
+            <Rectangle Grid.ColumnSpan="3" 
+                       Fill="#46495d"
+                       Margin="0">
+                <Rectangle.Effect>
+                    <DropShadowEffect
+                    ShadowDepth="10" 
+                    Direction="70"
+                    Color="Black"
+                    Opacity="0.6"
+                    BlurRadius="100"/>
+                </Rectangle.Effect>
+            </Rectangle>
 
             <DataGrid x:Name="ListObjectDG"
                   AutoGenerateColumns="False"
@@ -427,20 +491,5 @@
                 </DataGrid.RowDetailsTemplate>
             </DataGrid>
         </Grid>
-        
-        <!--Grid с добавлением объектов-->
-        <Grid x:Name="GridAddObjects"
-              Grid.Row="1" Grid.Column="1"
-              Visibility="Hidden">
-            
-        </Grid>
-        
-        <!--Grid с добавлением работ на объекте-->
-        <Grid x:Name="GridAddWorkOnObject"
-              Grid.Row="1" Grid.Column="1"
-              Visibility="Hidden">
-
-        </Grid>
-        
     </Grid>
 </Window>

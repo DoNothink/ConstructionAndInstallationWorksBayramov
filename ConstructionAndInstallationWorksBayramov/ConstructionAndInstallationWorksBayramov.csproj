@@ -63,6 +63,7 @@
     </Compile>
     <Compile Include="ClassFolder\CBClass.cs" />
     <Compile Include="ClassFolder\DGClass.cs" />
+    <Compile Include="ClassFolder\GlobalClass.cs" />
     <Compile Include="ClassFolder\VariableClass.cs" />
     <Compile Include="WindowFolder\AdminFolder\AdminWindow.xaml.cs">
       <DependentUpon>AdminWindow.xaml</DependentUpon>
@@ -180,6 +181,8 @@
   <ItemGroup>
     <Resource Include="ResourceFolder\lens.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="ResourceFolder\upd.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

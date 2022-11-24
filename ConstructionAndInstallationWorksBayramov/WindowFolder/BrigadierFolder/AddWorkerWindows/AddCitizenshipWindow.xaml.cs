@@ -22,9 +22,7 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder.BrigadierFolder.
     public partial class AddCitizenshipWindow : Window
     {
         SqlConnection sqlConnection =
-            new SqlConnection(@"Data Source=DESKTOP-D69MI98;
-                    Initial Catalog=ConstructionAndInstallationWorksBayramov;
-                    Integrated Security=True");
+            new SqlConnection(GlobalClass.SqlConnection);
         SqlCommand sqlCommand;
 
         public AddCitizenshipWindow()

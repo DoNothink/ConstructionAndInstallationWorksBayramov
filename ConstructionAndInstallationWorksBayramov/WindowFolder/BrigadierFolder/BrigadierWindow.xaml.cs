@@ -23,17 +23,17 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder.BrigadierFolder
     public partial class BrigadierWindow : Window
     {
         CBClass cBClass = new CBClass();
-        DGClass dGClass;
+        DGClass dGClassOne;
+        DGClass dGClassTwo;
         SqlConnection sqlConnection =
-            new SqlConnection(@"Data Source=DESKTOP-D69MI98;
-                    Initial Catalog=ConstructionAndInstallationWorksBayramov;
-                    Integrated Security=True");
+            new SqlConnection(GlobalClass.SqlConnection);
         SqlCommand sqlCommand;
         private string DateOfBirth { get; set; }
         public BrigadierWindow()
         {
             InitializeComponent();
-            dGClass = new DGClass(ListWorkersDG);
+            dGClassOne = new DGClass(ListWorkersDG);
+            dGClassTwo = new DGClass(ListObjectDG);
             cBClass.CBLoad(CitizenshipCB, "Citizenship", "IdCitizenship", "CitizenshipName");
             cBClass.CBLoad(SpecialtyCB, "Specialty", "IdSpecialty", "NameSpecialty");
             cBClass.CBLoad(PostCB, "Post", "IdPost", "NamePost");
@@ -53,13 +53,24 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder.BrigadierFolder
                     GridListBuilders.Visibility = Visibility.Visible; //вкл. грид+список
                     SearchTB.Visibility = Visibility.Visible; //вкл. поискТБ
                     GridAddBuilders.Visibility = Visibility.Hidden; //выкл. грид с добавлением
-                    dGClass.LoadDG("SELECT * FROM dbo.[WorkersView]");
+                    GridListObjects.Visibility = Visibility.Hidden;
+                    dGClassOne.LoadDG("SELECT * FROM dbo.[WorkersView]");
                     break;
 
                 case "Добавить рабочего":
                     GridAddBuilders.Visibility = Visibility.Visible; //вкл. грид с добавлением
                     GridListBuilders.Visibility = Visibility.Hidden; //выкл. грид+список
                     SearchTB.Visibility = Visibility.Hidden; //выкл поискТБ
+                    GridListObjects.Visibility = Visibility.Hidden;
+                    break;
+
+                case "Список объектов":
+                    GridListBuilders.Visibility= Visibility.Hidden;
+                    SearchTB.Visibility = Visibility.Hidden;
+                    GridAddBuilders.Visibility = Visibility.Hidden;
+                    GridListBuilders.Visibility = Visibility.Hidden;
+                    GridListObjects.Visibility = Visibility.Visible;
+                    dGClassTwo.LoadDG("SELECT * FROM dbo.[ObjectView]");
                     break;
             }
         }
@@ -94,7 +105,7 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder.BrigadierFolder
         /// </summary>
         private void SearchTB_TextChanged(object sender, TextChangedEventArgs e)
         {
-            dGClass.LoadDG("Select * From dbo.[WorkersView] " +
+            dGClassOne.LoadDG("Select * From dbo.[WorkersView] " +
                $"Where LastNameWorker Like '%{SearchTB.Text}%' " +
                $"OR FirstNameWorker Like '%{SearchTB.Text}%'" +
                $"OR MiddleNameWorker Like '%{SearchTB.Text}%'");
@@ -106,7 +117,7 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder.BrigadierFolder
         /// </summary>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            dGClass.LoadDG("SELECT * FROM dbo.[ObjectView]");
+            
         }
 
         /// <summary>
@@ -143,7 +154,7 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder.BrigadierFolder
             finally
             {
                 sqlConnection.Close();
-                dGClass.LoadDG("SELECT * FROM dbo.[UserView]");
+                dGClassOne.LoadDG("SELECT * FROM dbo.[UserView]");
             }
         }
 
@@ -188,6 +199,14 @@ namespace ConstructionAndInstallationWorksBayramov.WindowFolder.BrigadierFolder
         private void ListWorkersDG_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             new EditWorkerWindow().Show();
+        }
+
+        private void UpdAddBtn_Click(object sender, RoutedEventArgs e)
+        {
+            cBClass.CBLoad(CitizenshipCB, "Citizenship", "IdCitizenship", "CitizenshipName");
+            cBClass.CBLoad(SpecialtyCB, "Specialty", "IdSpecialty", "NameSpecialty");
+            cBClass.CBLoad(PostCB, "Post", "IdPost", "NamePost");
+            cBClass.CBLoad(BrigadeCB, "Brigade", "IdBrigade", "NameBrigade");
         }
     }
 }
